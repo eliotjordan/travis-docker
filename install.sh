@@ -23,6 +23,10 @@ sudo apt-get install -y slirp lxc aufs-tools cgroup-lite
 curl -s https://get.docker.com/ | sh
 sudo usermod -aG docker $USER
 sudo chown -R $USER /etc/docker
+sudo mkdir -p /etc/docker /var/lib/docker
+sudo touch /docker.img
+sudo chmod 777 /docker.img
+sudo dd if=/dev/zero of=/root/docker.img bs=1M count=5k
 
 
 # Install fig

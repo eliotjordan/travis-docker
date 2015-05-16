@@ -53,9 +53,6 @@ mount -t tmpfs none /var/run
 # takes the pain out of cgroups
 cgroups-mount
 
-# mount /var/lib/docker with a tmpfs
-mount -t tmpfs none /var/lib/docker
-
 # enable ipv4 forwarding for docker
 echo 1 > /proc/sys/net/ipv4/ip_forward
 
@@ -72,6 +69,18 @@ ip route add default via 10.1.1.254
 mkdir -p /run/resolvconf
 echo 'nameserver 8.8.8.8' > /run/resolvconf/resolv.conf
 mount --bind /run/resolvconf/resolv.conf /etc/resolv.conf
+
+
+
+set -x
+modprobe loop || true
+mount -t ext3 -o loop /docker.img /var/lib/docker
+chown -R travis:docker /etc/docker /var/lib/docker
+chmod 777 /var/lib/docker
+
+
+ls -la /var/lib
+ls -laR /var/lib/docker
 
 
 # Start docker daemon

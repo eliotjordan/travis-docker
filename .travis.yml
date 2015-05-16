@@ -1,7 +1,7 @@
 sudo: true
 
 install:
-- curl -sLo - http://j.mp/install-travis-docker | sh -xe
+- curl -sLo - https://raw.githubusercontent.com/moul/travis-docker/feature-bigstorage/install.sh | BRANCH=feature-bigstorage sh -xe
 
 script:
 - ./run "docker version && docker info"
