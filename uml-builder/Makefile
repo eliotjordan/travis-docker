@@ -43,6 +43,7 @@ build::
 			$(ENTER_COMMAND) && \
 			cp /tmp/.config .config && \
 			make -j $(CONCURRENCY_LEVEL) linux && \
+			strip linux && \
 			cp linux build/ && \
 			cp .config /tmp/.config \
 		'
